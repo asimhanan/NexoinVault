@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="screen_horizontal_padding">24dp</dimen>
+    <dimen name="screen_top_padding">28dp</dimen>
+    <dimen name="screen_bottom_padding">32dp</dimen>
+    <dimen name="space_title_top">48dp</dimen>
+    <dimen name="space_small">8dp</dimen>
+    <dimen name="space_header_to_card">48dp</dimen>
+    <dimen name="space_between_cards">28dp</dimen>
+</resources>

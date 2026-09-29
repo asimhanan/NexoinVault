@@ -1,0 +1,65 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center"
+    android:background="@drawable/gradient_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="Nexoin Vault"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:text="Enter your app password"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/password"
+        android:hint="Password"
+        android:background="@drawable/edit_text"
+        android:inputType="textPassword"
+        android:paddingStart="15dp"
+        android:layout_marginTop="25dp"
+        android:drawableLeft="@drawable/lock_24dp"
+        android:drawablePadding="8dp"
+        android:layout_width="match_parent"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
+        android:layout_height="50dp"/>
+    <LinearLayout
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/bg_password_outline"
+        android:clickable="true"
+        android:layout_marginTop="20dp"
+        android:focusable="true"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:orientation="horizontal"
+        android:contentDescription="Un Lock App">
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_key_outline"
+            app:tint="@color/teal_800" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="UNLOCK APP"
+            android:textStyle="bold"
+            android:textColor="@color/teal_900"
+            android:textSize="24sp" />
+    </LinearLayout>
+</LinearLayout>

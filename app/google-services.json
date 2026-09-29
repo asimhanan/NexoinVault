@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "262078604793",
+    "project_id": "hanan-24",
+    "storage_bucket": "hanan-24.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262078604793:android:098cd42539acd881a6c928",
+        "android_client_info": {
+          "package_name": "com.example.nexoinvaulit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN7j2dvzDDMRMI4j5GffmZISJu3dSDt-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262078604793:android:984191d31f053388a6c928",
+        "android_client_info": {
+          "package_name": "com.examplle.tariqburj"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN7j2dvzDDMRMI4j5GffmZISJu3dSDt-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

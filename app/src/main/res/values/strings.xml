@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">NexoinVaulit</string>
+        <string name="private_folders_title">My Private folders</string>
+        <string name="private_folders_subtitle">Only you can access these files.</string>
+        <string name="images_title">Images</string>
+        <string name="images_count">24 items</string>
+        <string name="videos_title">Videos</string>
+        <string name="videos_count">8 items</string>
+        <string name="change_password">Change password</string>
+        <string name="private_space_icon_description">Private space lock</string>
+        <string name="open_images_description">Open Images, 24 items</string>
+        <string name="open_videos_description">Open Videos, 8 items</string>
+        <string name="change_password_description">Change password</string>
+</resources>

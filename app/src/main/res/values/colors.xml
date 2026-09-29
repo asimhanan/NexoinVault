@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="gray">#C3C1C1</color>
+    <color name="yellow">#6DA7FBF9</color>
+    <color name="blue">#073B95</color>
+    <color name="red">#FAED82</color>
+    <color name="green">#249A0F</color>
+    <color name="orange">#E8AF02</color>
+    <color name="dark_red">#FF5722</color>
+    <color name="t_white">#7AFBFAFA</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <!-- Gradient colors -->
+    <color name="gradient_start">#FAC2C2</color>
+    <color name="gradient_end">#99DDFB</color>
+
+<!--    new colors-->
+        <color name="teal_900">#063E3B</color>
+        <color name="teal_800">#075A55</color>
+        <color name="teal_border">#174D49</color>
+        <color name="text_primary">#171A1C</color>
+        <color name="text_secondary">#697176</color>
+        <color name="folder_surface">#FCFDFC</color>
+        <color name="ripple_teal">#3346B8A9</color>
+        <color name="screen_white">#FCFCFD</color>
+        <color name="screen_mint">#E5FAF6</color>
+
+
+    <!-- EditText colors -->
+    <color name="edittext_background">#DDFFFFFF</color>
+    <color name="edittext_hint">#AA000000</color>
+    <color name="edittext_text">#FF000000</color>
+
+    <!-- Text colors -->
+
+
+    <!-- Button colors -->
+    <color name="button_text">#2BFFE7</color>
+</resources>
