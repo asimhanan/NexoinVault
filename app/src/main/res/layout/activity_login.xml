@@ -1,65 +1,164 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center"
-    android:background="@drawable/gradient_bg"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:text="Nexoin Vault"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:text="Enter your app password"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/password"
-        android:hint="Password"
-        android:background="@drawable/edit_text"
-        android:inputType="textPassword"
-        android:paddingStart="15dp"
-        android:layout_marginTop="25dp"
-        android:drawableLeft="@drawable/lock_24dp"
-        android:drawablePadding="8dp"
-        android:layout_width="match_parent"
-        android:textSize="25sp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/gray"
-        android:layout_height="50dp"/>
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_aurora_login"
+    android:fillViewport="true"
+    android:overScrollMode="never">
+
     <LinearLayout
-        android:id="@+id/login"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/bg_password_outline"
-        android:clickable="true"
-        android:layout_marginTop="20dp"
-        android:focusable="true"
-        android:gravity="center"
-        android:minHeight="48dp"
-        android:orientation="horizontal"
-        android:contentDescription="Un Lock App">
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingStart="24dp"
+        android:paddingTop="18dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="20dp">
 
         <ImageView
-            android:layout_width="26dp"
-            android:layout_height="26dp"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginTop="4dp"
             android:contentDescription="@null"
-            android:src="@drawable/ic_key_outline"
-            app:tint="@color/teal_800" />
+            android:src="@drawable/ic_vault_lock" />
+
+        <TextView
+            android:id="@+id/welcomeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="Welcome back"
+            android:textColor="#10243B"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="UNLOCK APP"
-            android:textStyle="bold"
-            android:textColor="@color/teal_900"
-            android:textSize="24sp" />
+            android:layout_marginTop="4dp"
+            android:text="Nexoin Vault"
+            android:textColor="#183044"
+            android:textSize="21sp" />
+
+        <TextView
+            android:id="@+id/passcodeHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Enter your 6-digit passcode"
+            android:textColor="#536A70"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:id="@+id/passcodeDots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:contentDescription="0 of 6 digits entered"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <View android:id="@+id/passcodeDot1" android:layout_width="13dp" android:layout_height="13dp" android:layout_marginStart="9dp" android:layout_marginEnd="9dp" android:background="@drawable/passcode_dot_empty" />
+            <View android:id="@+id/passcodeDot2" android:layout_width="13dp" android:layout_height="13dp" android:layout_marginStart="9dp" android:layout_marginEnd="9dp" android:background="@drawable/passcode_dot_empty" />
+            <View android:id="@+id/passcodeDot3" android:layout_width="13dp" android:layout_height="13dp" android:layout_marginStart="9dp" android:layout_marginEnd="9dp" android:background="@drawable/passcode_dot_empty" />
+            <View android:id="@+id/passcodeDot4" android:layout_width="13dp" android:layout_height="13dp" android:layout_marginStart="9dp" android:layout_marginEnd="9dp" android:background="@drawable/passcode_dot_empty" />
+            <View android:id="@+id/passcodeDot5" android:layout_width="13dp" android:layout_height="13dp" android:layout_marginStart="9dp" android:layout_marginEnd="9dp" android:background="@drawable/passcode_dot_empty" />
+            <View android:id="@+id/passcodeDot6" android:layout_width="13dp" android:layout_height="13dp" android:layout_marginStart="9dp" android:layout_marginEnd="9dp" android:background="@drawable/passcode_dot_empty" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/statusMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:accessibilityLiveRegion="polite"
+            android:textColor="#B3261E"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/keypad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="76dp" android:gravity="center" android:orientation="horizontal">
+                <FrameLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"><androidx.appcompat.widget.AppCompatButton android:id="@+id/key1" android:layout_width="68dp" android:layout_height="68dp" android:layout_gravity="center" android:background="@drawable/keypad_button" android:backgroundTint="@null" android:contentDescription="Digit 1" android:elevation="5dp" android:minWidth="0dp" android:minHeight="0dp" android:padding="0dp" android:text="1" android:textAllCaps="false" android:textColor="#10243B" android:textSize="24sp" /></FrameLayout>
+                <FrameLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"><androidx.appcompat.widget.AppCompatButton android:id="@+id/key2" android:layout_width="68dp" android:layout_height="68dp" android:layout_gravity="center" android:background="@drawable/keypad_button" android:backgroundTint="@null" android:contentDescription="Digit 2" android:elevation="5dp" android:minWidth="0dp" android:minHeight="0dp" android:padding="0dp" android:text="2" android:textAllCaps="false" android:textColor="#10243B" android:textSize="24sp" /></FrameLayout>
+                <FrameLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"><androidx.appcompat.widget.AppCompatButton android:id="@+id/key3" android:layout_width="68dp" android:layout_height="68dp" android:layout_gravity="center" android:background="@drawable/keypad_button" android:backgroundTint="@null" android:contentDescription="Digit 3" android:elevation="5dp" android:minWidth="0dp" android:minHeight="0dp" android:padding="0dp" android:text="3" android:textAllCaps="false" android:textColor="#10243B" android:textSize="24sp" /></FrameLayout>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="76dp" android:layout_marginTop="4dp" android:gravity="center" android:orientation="horizontal">
+                <FrameLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"><androidx.appcompat.widget.AppCompatButton android:id="@+id/key4" android:layout_width="68dp" android:layout_height="68dp" android:layout_gravity="center" android:background="@drawable/keypad_button" android:backgroundTint="@null" android:contentDescription="Digit 4" android:elevation="5dp" android:minWidth="0dp" android:minHeight="0dp" android:padding="0dp" android:text="4" android:textAllCaps="false" android:textColor="#10243B" android:textSize="24sp" /></FrameLayout>
+                <FrameLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"><androidx.appcompat.widget.AppCompatButton android:id="@+id/key5" android:layout_width="68dp" android:layout_height="68dp" android:layout_gravity="center" android:background="@drawable/keypad_button" android:backgroundTint="@null" android:contentDescription="Digit 5" android:elevation="5dp" android:minWidth="0dp" android:minHeight="0dp" android:padding="0dp" android:text="5" android:textAllCaps="false" android:textColor="#10243B" android:textSize="24sp" /></FrameLayout>
+                <FrameLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"><androidx.appcompat.widget.AppCompatButton android:id="@+id/key6" android:layout_width="68dp" android:layout_height="68dp" android:layout_gravity="center" android:background="@drawable/keypad_button" android:backgroundTint="@null" android:contentDescription="Digit 6" android:elevation="5dp" android:minWidth="0dp" android:minHeight="0dp" android:padding="0dp" android:text="6" android:textAllCaps="false" android:textColor="#10243B" android:textSize="24sp" /></FrameLayout>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="76dp" android:layout_marginTop="4dp" android:gravity="center" android:orientation="horizontal">
+                <FrameLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"><androidx.appcompat.widget.AppCompatButton android:id="@+id/key7" android:layout_width="68dp" android:layout_height="68dp" android:layout_gravity="center" android:background="@drawable/keypad_button" android:backgroundTint="@null" android:contentDescription="Digit 7" android:elevation="5dp" android:minWidth="0dp" android:minHeight="0dp" android:padding="0dp" android:text="7" android:textAllCaps="false" android:textColor="#10243B" android:textSize="24sp" /></FrameLayout>
+                <FrameLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"><androidx.appcompat.widget.AppCompatButton android:id="@+id/key8" android:layout_width="68dp" android:layout_height="68dp" android:layout_gravity="center" android:background="@drawable/keypad_button" android:backgroundTint="@null" android:contentDescription="Digit 8" android:elevation="5dp" android:minWidth="0dp" android:minHeight="0dp" android:padding="0dp" android:text="8" android:textAllCaps="false" android:textColor="#10243B" android:textSize="24sp" /></FrameLayout>
+                <FrameLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"><androidx.appcompat.widget.AppCompatButton android:id="@+id/key9" android:layout_width="68dp" android:layout_height="68dp" android:layout_gravity="center" android:background="@drawable/keypad_button" android:backgroundTint="@null" android:contentDescription="Digit 9" android:elevation="5dp" android:minWidth="0dp" android:minHeight="0dp" android:padding="0dp" android:text="9" android:textAllCaps="false" android:textColor="#10243B" android:textSize="24sp" /></FrameLayout>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="76dp" android:layout_marginTop="4dp" android:gravity="center" android:orientation="horizontal">
+                <FrameLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" ><androidx.appcompat.widget.AppCompatButton android:id="@+id/key" android:layout_width="68dp" android:layout_height="68dp" android:layout_gravity="center" android:background="@drawable/keypad_button" android:backgroundTint="@null" android:contentDescription="Digit 0" android:elevation="5dp" android:minWidth="0dp" android:minHeight="0dp" android:padding="0dp" android:text="" android:textAllCaps="false" android:textColor="#10243B" android:textSize="24sp" /></FrameLayout>
+                <FrameLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"><androidx.appcompat.widget.AppCompatButton android:id="@+id/key0" android:layout_width="68dp" android:layout_height="68dp" android:layout_gravity="center" android:background="@drawable/keypad_button" android:backgroundTint="@null" android:contentDescription="Digit 0" android:elevation="5dp" android:minWidth="0dp" android:minHeight="0dp" android:padding="0dp" android:text="0" android:textAllCaps="false" android:textColor="#10243B" android:textSize="24sp" /></FrameLayout>
+                <FrameLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"><androidx.appcompat.widget.AppCompatButton android:id="@+id/deleteKey" android:layout_width="68dp" android:layout_height="68dp" android:layout_gravity="center" android:background="@drawable/keypad_button" android:backgroundTint="@null" android:contentDescription="Delete last digit" android:elevation="5dp" android:minWidth="0dp" android:minHeight="0dp" android:padding="0dp" android:text="⌫" android:textAllCaps="false" android:textColor="#10243B" android:textSize="24sp" /></FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/legacyLink"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="Use full password instead"
+            android:textColor="#187D77"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:id="@+id/legacyPanel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <EditText
+                android:id="@+id/legacyPassword"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:background="@drawable/legacy_password_field"
+                android:hint="Your saved password"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:singleLine="true"
+                android:textColor="#10243B"
+                android:textColorHint="#71818B"
+                android:textSize="16sp" />
+            <Button
+                android:id="@+id/legacyUnlock"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/action_button"
+                android:backgroundTint="@null"
+                android:text="Unlock vault"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="19sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="Protected by device encryption"
+            android:textColor="#536A70"
+            android:textSize="15sp" />
     </LinearLayout>
-</LinearLayout>
+</ScrollView>

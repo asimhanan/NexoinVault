@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<paths>
-    <files-path name="internal_files" path="." />
-    <cache-path name="vault_previews" path="vault_previews/" />
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <cache-path
+    name="vault_previews"
+    path="vault_previews/" />
+<cache-path
+    name="vault_shares"
+    path="vault_shares/" />
 </paths>

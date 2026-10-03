@@ -35,10 +35,14 @@ public class folder extends AppCompatActivity {
         videoMode = "Videos".equals(folderName);
         findViewById(R.id.importButton).setOnClickListener(v -> pick());
         findViewById(R.id.pasteButton).setOnClickListener(v -> paste());
-        load();
     }
 
     private File dir() { return storage.getFolder(folderName); }
+
+    @Override protected void onResume() {
+        super.onResume();
+        load();
+    }
 
     private void pick() {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);

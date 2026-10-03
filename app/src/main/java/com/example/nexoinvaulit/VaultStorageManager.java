@@ -2,6 +2,7 @@ package com.example.nexoinvaulit;
 
 import android.content.Context;
 import android.net.Uri;
+import android.system.Os;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -149,6 +150,62 @@ public class VaultStorageManager {
         }
     }
 
+    /** Replace a saved encrypted image with a newly transformed plaintext image. */
+    public void replaceEncryptedImage(File storedFile, File plaintextImage) throws Exception {
+        if (!isInsideVault(storedFile) || !storedFile.isFile()
+                || !storedFile.getName().toLowerCase(Locale.ROOT).endsWith(ENCRYPTED_SUFFIX)) {
+            throw new SecurityException("Invalid encrypted image");
+        }
+        if (plaintextImage == null || !plaintextImage.isFile()) throw new IllegalArgumentException("Missing transformed image");
+        File temp = new File(storedFile.getParentFile(), ".rotate-" + UUID.randomUUID() + ".tmp");
+        byte[] key = VaultSession.requireMasterKey();
+        try (InputStream input = new BufferedInputStream(new FileInputStream(plaintextImage))) {
+            encrypt(input, temp, key);
+            // Both files are in the same vault directory, so rename atomically replaces the old ciphertext.
+            Os.rename(temp.getAbsolutePath(), storedFile.getAbsolutePath());
+        } finally {
+            java.util.Arrays.fill(key, (byte) 0);
+            if (temp.exists()) temp.delete();
+        }
+    }
+
+    /** Delete only a regular file whose canonical path is inside the private vault. */
+    public boolean deleteVaultFile(File storedFile) {
+        if (!isInsideVault(storedFile) || !storedFile.isFile()) throw new SecurityException("Invalid vault file");
+        return storedFile.delete();
+    }
+
+    /** Create a plaintext cache copy for Android sharing; stale copies are removed after 24 hours. */
+    public File createShareCopy(File storedFile) throws Exception {
+        File decrypted = createDecryptedCacheFile(storedFile);
+        File shareDir = new File(context.getCacheDir(), "vault_shares");
+        if (!shareDir.exists() && !shareDir.mkdirs()) {
+            if (!decrypted.equals(storedFile)) decrypted.delete();
+            throw new IllegalStateException("Cannot create share cache");
+        }
+        clearStaleShareFiles(shareDir);
+        File shareFile = new File(shareDir, "shared-" + UUID.randomUUID() + extensionFor(storedFile.getName()));
+        try (InputStream input = new BufferedInputStream(new FileInputStream(decrypted));
+             OutputStream output = new BufferedOutputStream(new FileOutputStream(shareFile))) {
+            byte[] buffer = new byte[64 * 1024];
+            int count;
+            while ((count = input.read(buffer)) != -1) output.write(buffer, 0, count);
+            output.flush();
+            return shareFile;
+        } catch (Exception error) {
+            shareFile.delete();
+            throw error;
+        } finally {
+            if (!decrypted.equals(storedFile)) decrypted.delete();
+        }
+    }
+
+    private static void clearStaleShareFiles(File shareDir) {
+        File[] files = shareDir.listFiles((dir, name) -> name.startsWith("shared-"));
+        long cutoff = System.currentTimeMillis() - 24L * 60L * 60L * 1000L;
+        if (files != null) for (File file : files) if (file.lastModified() < cutoff) file.delete();
+    }
+
     public void clearStalePreviewFiles() {
         File previewDir = new File(context.getCacheDir(), "vault_previews");
         File[] files = previewDir.listFiles((dir, name) -> name.startsWith("vault-preview-"));
@@ -199,7 +256,9 @@ public class VaultStorageManager {
     }
 
     private static String extensionFor(String encryptedFilename) {
-        String original = encryptedFilename.substring(0, encryptedFilename.length() - ENCRYPTED_SUFFIX.length());
+        String original = encryptedFilename.toLowerCase(Locale.ROOT).endsWith(ENCRYPTED_SUFFIX)
+                ? encryptedFilename.substring(0, encryptedFilename.length() - ENCRYPTED_SUFFIX.length())
+                : encryptedFilename;
         int dot = original.lastIndexOf('.');
         return dot >= 0 && dot < original.length() - 1 ? original.substring(dot) : ".bin";
     }
